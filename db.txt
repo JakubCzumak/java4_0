@@ -5,3 +5,4 @@ Janusz 40
 kuba 12
 ryszard 65
 seba 22
+kubaaa 12
