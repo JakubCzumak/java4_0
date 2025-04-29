@@ -1,24 +1,34 @@
 public class Student {
+    private String name;
+    private int age;
+    private String major;
 
-  private String Name;
-  private int Age;
+    public Student(String name, int age, String major) {
+        this.name = name;
+        this.age = age;
+        this.major = major;
+    }
 
-  public Student(String name, int age) {
-    Name = name;
-    Age = age;
-  }
+    @Override
+    public String toString() {
+        return "Imię: " + name + ", Wiek: " + age + ", Kierunek: " + major;
+    }
 
-  public String GetName() {return Name;}
-  public int GetAge() {return Age;}
+    public String toDataString() {
+        return name + ";" + age + ";" + major;
+    }
 
-  public String ToString() {
-    return Name + " " + Integer.toString(Age);
-  }
+    public static Student fromDataString(String line) {
+        String[] parts = line.split(";");
+        if (parts.length != 3) {
+            throw new IllegalArgumentException("Nieprawidłowy format danych: " + line);
+        }
 
-  public static Student Parse(String str) {
-    String[] data = str.split(" ");
-    if(data.length != 2) 
-      return new Student("Parse Error", -1);
-    return new Student(data[0], Integer.parseInt(data[1]));
-  }
+        try {
+            int age = Integer.parseInt(parts[1].trim());
+            return new Student(parts[0].trim(), age, parts[2].trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Nieprawidłowy wiek: " + parts[1]);
+        }
+    }
 }

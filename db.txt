@@ -6,3 +6,6 @@ kuba 12
 ryszard 65
 seba 22
 kubaaa 12
+Kuba;22;etdi
+kuba;25;fdsfs
+kuba ;22;et di
