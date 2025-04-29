@@ -9,3 +9,5 @@ kubaaa 12
 Kuba;22;etdi
 kuba;25;fdsfs
 kuba ;22;et di
+kuba 23 etdi
+klaudisz 54 filozof

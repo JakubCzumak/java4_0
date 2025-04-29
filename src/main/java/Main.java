@@ -1,65 +1,49 @@
-import java.util.List;
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Service service = new Service();
+class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    Service s = new Service();
 
-        while (true) {
-            System.out.println("\n--- MENU ---");
-            System.out.println("1. Dodaj studenta");
-            System.out.println("2. Wyświetl wszystkich studentów");
-            System.out.println("3. Wyjście");
-            System.out.print("Wybierz opcję: ");
+    while (true) {
+      System.out.println("Wybierz opcję:");
+      System.out.println("1. Dodaj studenta");
+      System.out.println("2. Wyświetl wszystkich studentów");
+      System.out.println("3. Wyjście");
 
-            int opcja = scanner.nextInt();
-            scanner.nextLine(); // czyści bufor
+      String option = scanner.nextLine();
 
-            switch (opcja) {
-                case 1:
-                    System.out.print("Podaj imię studenta: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Podaj wiek studenta: ");
-                    int age = scanner.nextInt();
-                    scanner.nextLine(); // czyści bufor
-                    System.out.print("Podaj kierunek studiów: ");
-                    String major = scanner.nextLine();
+      try {
+        if (option.equals("1")) {
+          System.out.print("Imię: ");
+          String name = scanner.nextLine();
 
-                    Student student = new Student(name, age, major);
-                    try {
-                        service.addStudent(student);
-                        System.out.println(" Student dodany.");
-                    } catch (IOException e) {
-                        System.out.println(" Błąd podczas zapisu do pliku.");
-                    }
-                    break;
+          System.out.print("Wiek: ");
+          int age = Integer.parseInt(scanner.nextLine());
 
-                    case 2:
-                    try {
-                        List<Student> students = service.getAllStudents();
-                        if (students.isEmpty()) {
-                            System.out.println("Brak studentów w bazie.");
-                        } else {
-                            System.out.println(" Lista studentów:");
-                            for (Student s : students) {
-                                System.out.println(s);
-                            }
-                        }
-                    } catch (IOException | IllegalArgumentException e) {
-                        System.out.println(" Błąd: " + e.getMessage());
-                    }
-                    break;
+          System.out.print("Kierunek studiów: ");
+          String major = scanner.nextLine();
 
-                case 3:
-                    System.out.println(" Zakończono program.");
-                    scanner.close();
-                    return;
+          s.addStudent(new Student(name, age, major));
 
-                default:
-                    System.out.println(" Nieprawidłowa opcja.");
-            }
+        } else if (option.equals("2")) {
+          var students = s.getStudents();
+          for (Student current : students) {
+            System.out.println(current);
+          }
+        } else if (option.equals("3")) {
+          break;
+        } else {
+          System.out.println("Nieprawidłowa opcja.");
         }
+      } catch (IOException e) {
+        System.out.println("Błąd podczas operacji na pliku: " + e.getMessage());
+      } catch (NumberFormatException e) {
+        System.out.println("Nieprawidłowy format liczbowy.");
+      }
     }
+
+    scanner.close();
+  }
 }

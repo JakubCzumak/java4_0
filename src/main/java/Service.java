@@ -1,36 +1,39 @@
-import java.io.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Service {
-    private static final String FILE_NAME = "db.txt";
 
-    public void addStudent(Student student) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true));
-        writer.write(student.toDataString());
-        writer.newLine();
-        writer.close();
+  public void addStudent(Student student) throws IOException {
+    var f = new FileWriter("db.txt", true);
+    var b = new BufferedWriter(f);
+    b.append(student.toString());
+    b.newLine();
+    b.close();
+  }
+
+  public Collection<Student> getStudents() throws IOException {
+    var ret = new ArrayList<Student>();
+    var f = new FileReader("db.txt");
+    var reader = new BufferedReader(f);
+    String line;
+
+    while ((line = reader.readLine()) != null) {
+      Student student = Student.Parse(line);
+      if (student != null) {
+        ret.add(student);
+      }
     }
 
-    public List<Student> getAllStudents() throws IOException {
-        List<Student> students = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
-        String line;
-        int lineNumber = 1;
+    reader.close();
+    return ret;
+  }
 
-        while ((line = reader.readLine()) != null) {
-            if (line.trim().isEmpty()) {
-                lineNumber++;
-                continue;
-            }
-            try {
-                students.add(Student.fromDataString(line));
-            } catch (Exception e) {
-                System.out.println(" Błąd w linii " + lineNumber + ": \"" + line + "\" — " + e.getMessage());
-            }
-            lineNumber++;
-        }
-
-        reader.close();
-        return students;
-    }
+  public Student findStudentByName(String name) {
+    return null; // metoda jeszcze niezaimplementowana
+  }
 }
