@@ -11,3 +11,4 @@ kuba;25;fdsfs
 kuba ;22;et di
 kuba 23 etdi
 klaudisz 54 filozof
+asda 15 etdi 2003

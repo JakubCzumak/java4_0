@@ -25,7 +25,10 @@ class Main {
           System.out.print("Kierunek studiów: ");
           String major = scanner.nextLine();
 
-          s.addStudent(new Student(name, age, major));
+          System.out.print("Data urodzenia(dzień-miesiąc-rok) : ");
+          String birthDate = scanner.nextLine();
+
+          s.addStudent(new Student(name, age, major, birthDate));
 
         } else if (option.equals("2")) {
           var students = s.getStudents();
