@@ -10,7 +10,7 @@ class Main {
       System.out.println("Wybierz opcję:");
       System.out.println("1. Dodaj studenta");
       System.out.println("2. Wyświetl wszystkich studentów");
-      System.out.println("3. Wyszukaj studenta po imie");
+      System.out.println("3. Wyszukaj studenta po imieniu");
       System.out.println("4. Wyjście");
 
       String option = scanner.nextLine();
@@ -47,10 +47,13 @@ class Main {
             System.out.println("Nie można znaleźć studenta o podanym imieniu: " + searchName);
           }
 
-        } else if (option.equals("4")) {
-          break;
+        } else if (option.equals("4"))
+          
 
-        } else {
+           
+        {break;}
+        
+        else {
           System.out.println("Nieprawidłowa opcja.");
         }
       } catch (IOException e) {
