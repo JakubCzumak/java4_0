@@ -34,6 +34,15 @@ public class Service {
   }
 
   public Student findStudentByName(String name) {
-    return null; // metoda jeszcze niezaimplementowana
+    try {
+      for (Student student : getStudents()) {
+        if (student.GetName().equalsIgnoreCase(name)) {
+          return student;
+        }
+      }
+    } catch (IOException e) {
+      System.out.println("Błąd podczas wczytywania studentów: " + e.getMessage());
+    }
+    return null;
   }
 }

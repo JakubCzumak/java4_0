@@ -10,7 +10,8 @@ class Main {
       System.out.println("Wybierz opcję:");
       System.out.println("1. Dodaj studenta");
       System.out.println("2. Wyświetl wszystkich studentów");
-      System.out.println("3. Wyjście");
+      System.out.println("3. Wyszukaj studenta po imie");
+      System.out.println("4. Wyjście");
 
       String option = scanner.nextLine();
 
@@ -25,7 +26,7 @@ class Main {
           System.out.print("Kierunek studiów: ");
           String major = scanner.nextLine();
 
-          System.out.print("Data urodzenia(dzień-miesiąc-rok) : ");
+          System.out.print("Data urodzenia (rok-miesiac-dzien): ");
           String birthDate = scanner.nextLine();
 
           s.addStudent(new Student(name, age, major, birthDate));
@@ -35,8 +36,20 @@ class Main {
           for (Student current : students) {
             System.out.println(current);
           }
+
         } else if (option.equals("3")) {
+          System.out.print("Podaj imię studenta do wyszukania: ");
+          String searchName = scanner.nextLine();
+          Student found = s.findStudentByName(searchName);
+          if (found != null) {
+            System.out.println("Dane wyszukiwanego studenta: " + found);
+          } else {
+            System.out.println("Nie można znaleźć studenta o podanym imieniu: " + searchName);
+          }
+
+        } else if (option.equals("4")) {
           break;
+
         } else {
           System.out.println("Nieprawidłowa opcja.");
         }

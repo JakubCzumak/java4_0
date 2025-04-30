@@ -22,7 +22,7 @@ public class Student {
   }
 
   public static Student Parse(String str) {
-    String[] data = str.split(" ", 4); // podziel tylko na 4 części
+    String[] data = str.split(" ", 4); 
     if (data.length != 4) {
       return null;
     }
